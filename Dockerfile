@@ -1,15 +1,20 @@
 FROM php:8.1-apache
 
-# Install Node.js & npm
-RUN apt-get update && apt-get install -y nodejs npm
+# Install Node.js, npm, git, and zip dependencies for Composer
+RUN apt-get update && apt-get install -y nodejs npm git unzip libzip-dev \
+    && docker-php-ext-install zip
+
+# Install Composer globally
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
 # Copy project files
 COPY . .
 
-# Install dependencies
+# Install Node and PHP dependencies
 RUN npm install
+RUN composer install --no-dev --optimize-autoloader
 
 # Enable Apache rewrite module and configure web root
 RUN a2enmod rewrite
