@@ -20,5 +20,5 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/conf-ava
 # Expose web port
 EXPOSE 80
 
-# Start both Node bot and Apache web server
-CMD node bot.js & apache2-foreground
+# Replace DISCORD_TOKEN_PLACEHOLDER at startup and launch bot + Apache
+CMD sed -i "s|DISCORD_TOKEN_PLACEHOLDER|${DISCORD_TOKEN}|g" _config.json && node bot.js & apache2-foreground
