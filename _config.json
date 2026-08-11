@@ -1,6 +1,6 @@
 {
 	"debug" : false,
-	"discordToken": "your-discord-api-token",
+	"discordToken": "DISCORD_TOKEN_PLACEHOLDER",
 	"webPassword": "password-for-web-gui",
 	"customToken": "token-for-your-custom-api-endpoints",
 	"loadingEndpoint": "https://your.site/loadEvents", 
